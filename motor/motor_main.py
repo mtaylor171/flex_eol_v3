@@ -426,7 +426,6 @@ def run_motor(MC, file_full, file):
                 MC.pwm_control()
                 if(len(MC.data[0]) > 1):
                     MC.timestamp_steady_state = MC.data[0][-1]
-                    print(f"Steady state timestamp: {MC.timestamp_steady_state}")
             pwm_counter += 1
 
         for i in range(0, ACTIVE_CHANNELS):
