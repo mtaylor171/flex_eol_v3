@@ -426,6 +426,7 @@ def run_motor(MC, file_full, file):
                 MC.pwm_control()
                 if(len(MC.data[0]) > 1):
                     MC.timestamp_steady_state = MC.data[0][-1]
+                    print(f"Steady state timestamp: {MC.timestamp_steady_state}")
             pwm_counter += 1
 
         for i in range(0, ACTIVE_CHANNELS):
@@ -583,42 +584,7 @@ def run_main():
                 os.remove("/home/pi/Documents/MOTOR_DATA_FOLDER/" + FILE_OUTPUT_NAME + " mode2_fulldata")
             time.sleep(3)
             return -1
-        #time.sleep(5)
-        '''
-        print("*****************************\n")
-        print("----Testing Mode 3----")
-        
-        file3 = open("/home/pi/Documents/MOTOR_DATA_FOLDER/" + FILE_OUTPUT_NAME + " mode3_test", 'w', newline='')
-        resp3, msg3 = run_motor(MC_3, file3)
-        print(msg3)
-        #end_sequence(MC_2)
-        if resp3 < 0:
-            #print('\033c')
-            print(msg3)
-            while(message_display("\nType 'c' and ENTER to continue: ", 'c') != 1):
-                pass
-            print('\033c')
-            print("Restarting test program...")
-            time.sleep(3)
-            return -1
-        time.sleep(5)
-        print("*****************************\n")
-        print("----Testing Mode 4----")
-        
-        file4 = open("/home/pi/Documents/MOTOR_DATA_FOLDER/" + FILE_OUTPUT_NAME + " mode4_test", 'w', newline='')
-        resp4, msg4 = run_motor(MC_4, file4)
-        print(msg2)
-        #end_sequence(MC_2)
-        if resp4 < 0:
-            #print('\033c')
-            print(msg2)
-            while(message_display("\nType 'c' and ENTER to continue: ", 'c') != 1):
-                pass
-            print('\033c')
-            print("Restarting test program...")
-            time.sleep(3)
-            return -1
-        '''
+
         print(f"FILES FOR THIS TEST WILL BE SAVED WITH THE TIMESTAMP: {FILE_OUTPUT_NAME}\n")
         print("\nCalculating total RMS values. This may take up to a minute...\n")
         rms1, rms2 = calculate_rms.main(FILE_OUTPUT_NAME + " mode1_fulldata", FILE_OUTPUT_NAME + " mode2_fulldata", MC_1.data[0].index(MC_1.timestamp_steady_state), MC_2.data[0].index(MC_2.timestamp_steady_state))
